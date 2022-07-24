@@ -36,7 +36,7 @@
     
     <link href="https://prophone.herokuapp.com/staticfiles/landing_page_gen/style.css" rel="stylesheet">
     <link href="https://prophone.herokuapp.com/staticfiles/landing_page_gen/render.css" rel="stylesheet">
-    <script src="https://prophone.herokuapp.com/staticfiles/landing_page_gen/render.js"></script> 
+    <script src="https://prophone.herokuapp.com/staticfiles/landing_page_gen/render.js"></script>
 </head>
 
 <body>
@@ -45,7 +45,7 @@
 
 <div class = "flex w-full flex-col">  
     <div class="fixed z-40 w-full lg:h-25 lg:py-4 items-start justify-start  bg-white text-gray-700  dark-mode:text-gray-200 dark-mode:bg-gray-800">
-  <div x-data="{ open: false }" class="flex flex-col lg:flex-r max-w-screen-xl px-4 mx-auto lg:items-center lg:justify-between lg:flex-row lg:px-6 lg:px-8">
+  <div x-data="{ open: false,buttonDisabled: false }" class="flex flex-col lg:flex-r max-w-screen-xl px-4 mx-auto lg:items-center lg:justify-between lg:flex-row lg:px-6 lg:px-8">
     <div class="py-4 flex flex-row items-center justify-between">
       
         <a href= " #about "> <img class="h-16 w-auto relative" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/8BTBS6M46YWZT86PUTPAVRGH74I8SZYPJHQJ1MK5.png" alt="Bulldog Window Cleaning logo"> </a>
@@ -170,7 +170,7 @@ class="flex relative flex-col w-full  bg-gray-900 text-white  lg:flex-row lg:fle
 </button>
 
         <div x-show.transition.opacity="open" class="transform-none p-4 fixed h-screen w-screen flex justify-center items-center bottom-0 right-0 bg-black bg-opacity-75 z-50">
-    <form x-on:click.away="open = false" x-show.transition="open" class=" text-black max-w-3xl max-h-full h-auto p-8 py-10 overflow-auto bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7 mt-16 md:mt-0 md:w-2/5 z-50">
+    <form  x-data="{ buttonDisabled: false }" x-on:click.away="open = false" x-show.transition="open" class=" text-black max-w-3xl max-h-full h-auto p-8 py-10 overflow-auto bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7 mt-16 md:mt-0 md:w-2/5 z-50">
             <h3 class="mb-6 text-2xl font-medium text-black text-center">Send us a Text</h3>
         <div class="block mb-4 border border-gray-200 rounded-lg">
             <input type="text" name="first-name" id="1-first-name" class="block w-full px-4 py-3 border-2 border-transparent rounded-lg focus:border-blue-500 focus:outline-none" placeholder="First Name">
@@ -185,14 +185,18 @@ class="flex relative flex-col w-full  bg-gray-900 text-white  lg:flex-row lg:fle
             <textarea name="message" cols="5" id="1-message" class="block w-full px-4 py-3 border-2 border-transparent rounded-lg focus:border-blue-500 focus:outline-none" placeholder="What is your message?"></textarea>
         </div>
         <div class="block">
-        <button type="button" 
+        <button
+
+                x-on:click.debounce.500ms="buttonDisabled = true ;send_sms(1, 'Bulldog-Window-Cleaning')"
+                 x-bind:disabled="buttonDisabled"
+                type="button"
          
             onMouseOver="this.style.backgroundColor='#111827'; this.style.color='#9ca3af' "
             onMouseOut="this.style.backgroundColor='#9ca3af'; this.style.color='white'"
             style="background-color:#9ca3af; color:white"               
 
          
-        onclick= "send_sms(1, 'Bulldog-Window-Cleaning')" 
+
         class="w-full px-3 py-4 font-bold font-lg text-white  bg-gray-400 text-white hover:bg-black hover:text-gray-400 rounded-lg">Send</button> 
         </div>           
 
@@ -221,7 +225,7 @@ class="flex relative flex-col w-full  bg-gray-900 text-white  lg:flex-row lg:fle
 </button>
 
         <div x-show.transition.opacity="open" class="transform-none p-4 fixed h-screen w-screen flex justify-center items-center bottom-0 right-0 bg-black bg-opacity-75 z-50">
-    <form x-on:click.away="open = false" x-show.transition="open" class=" text-black max-w-3xl max-h-full h-auto p-8 py-10 overflow-auto bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7 mt-16 md:mt-0 md:w-2/5 z-50">
+    <form  x-data="{ buttonDisabled: false }" x-on:click.away="open = false" x-show.transition="open" class=" text-black max-w-3xl max-h-full h-auto p-8 py-10 overflow-auto bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7 mt-16 md:mt-0 md:w-2/5 z-50">
             <h3 class="mb-6 text-2xl font-medium text-black text-center">Send us a Text</h3>
         <div class="block mb-4 border border-gray-200 rounded-lg">
             <input type="text" name="first-name" id="2-first-name" class="block w-full px-4 py-3 border-2 border-transparent rounded-lg focus:border-blue-500 focus:outline-none" placeholder="First Name">
@@ -236,14 +240,18 @@ class="flex relative flex-col w-full  bg-gray-900 text-white  lg:flex-row lg:fle
             <textarea name="message" cols="5" id="2-message" class="block w-full px-4 py-3 border-2 border-transparent rounded-lg focus:border-blue-500 focus:outline-none" placeholder="What is your message?"></textarea>
         </div>
         <div class="block">
-        <button type="button" 
+        <button
+
+                x-on:click.debounce.500ms="buttonDisabled = true ;send_sms(2, 'Bulldog-Window-Cleaning')"
+                 x-bind:disabled="buttonDisabled"
+                type="button"
          
             onMouseOver="this.style.backgroundColor='#111827'; this.style.color='#9ca3af' "
             onMouseOut="this.style.backgroundColor='#9ca3af'; this.style.color='white'"
             style="background-color:#9ca3af; color:white"               
 
          
-        onclick= "send_sms(2, 'Bulldog-Window-Cleaning')" 
+
         class="w-full px-3 py-4 font-bold font-lg text-white  bg-gray-400 text-white hover:bg-black hover:text-gray-400 rounded-lg">Send</button> 
         </div>           
 
@@ -483,66 +491,62 @@ class="flex flex-col flex-grow w-full overflow-hidden  lg:flex-row sm:mx-auto  b
         <div class="container relative flex flex-col justify-between h-full max-w-6xl px-10 mx-auto xl:px-0">
             <h2  style= "color:#111827" class="mb-3 text-3xl font-extrabold leading-none sm:text-4xl lg:text-7xl tracking-wide  text-center">Gallery</h2>
             <h2  style= "color:#9ca3af" class="my-3 mb-10 text-xl font-medium  text-gray-400  text-center">See why our customers love us</h2>
-            <div class="flex flex-wrap md:mx-4 md:mb-8 md:flex-row" x-data="{ open:false, activeSlide : 0, slides: [   [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/161464200_2932631953632460_78734326110275460_n.jpg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/BLQ8NP486457JLTAOTJYCMBE03VEB6LKTNG6HDFM.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/6a2ced71-983e-4084-8734-d1751ab6d6be.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/FPNN5WHVPGV9TU40EHSR9QKBRGYC5AT49LEGXUES.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/5JMNUZR3QSF2JH1VW1EKUM3G1POTA06DDNHSLR3W.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/K8IP1HQZAOJRQYH6BFS6T7JC38ESAC2HSICHW2DC.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/2XUFFPVETWIF5KUARUVRXXGF6C95GU6NX189UM6V.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/TSE3QBG0HPCUBXUAHM5L3EQ82CTGKQ1LIROBFW4Q.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/54695e39-4da9-47d6-8922-3cd59f91ba0a.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/A3ABPF4ALBUWNT6NRKRT7K7S9CO9R0F7ZUO7UPZ3.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/XRAGMQHQJU2ZP8P2GBTI0VYGUGW5TF6ZFJMO7F2K.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/4UTZQJ5Q2V5TEBN39FI12MJ47OOCNKW38DVUSCQM.png', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/9QVTK23D53QRY8T7F8Z8UWVYBBOGYKMSF40DP6WB.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/LCJ6LJ2TICUG78Y576JQ6TK3GYYTS92DR5OVG2MT.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/JOH54BOZXD5TIP8HW38XKTW6TXELSUSW9BCQIR34.jpeg', 'photo'],   ] }" @keydown.escape= "open = false"   >
+            <div class="flex flex-wrap md:mx-4 md:mb-8 md:flex-row" x-data="{ open:false, activeSlide : 0, slides: [   [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/161464200_2932631953632460_78734326110275460_n.jpg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/BLQ8NP486457JLTAOTJYCMBE03VEB6LKTNG6HDFM.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/6a2ced71-983e-4084-8734-d1751ab6d6be.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/FPNN5WHVPGV9TU40EHSR9QKBRGYC5AT49LEGXUES.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/5JMNUZR3QSF2JH1VW1EKUM3G1POTA06DDNHSLR3W.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/K8IP1HQZAOJRQYH6BFS6T7JC38ESAC2HSICHW2DC.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/2XUFFPVETWIF5KUARUVRXXGF6C95GU6NX189UM6V.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/TSE3QBG0HPCUBXUAHM5L3EQ82CTGKQ1LIROBFW4Q.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/54695e39-4da9-47d6-8922-3cd59f91ba0a.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/A3ABPF4ALBUWNT6NRKRT7K7S9CO9R0F7ZUO7UPZ3.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/XRAGMQHQJU2ZP8P2GBTI0VYGUGW5TF6ZFJMO7F2K.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/4UTZQJ5Q2V5TEBN39FI12MJ47OOCNKW38DVUSCQM.png', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/9QVTK23D53QRY8T7F8Z8UWVYBBOGYKMSF40DP6WB.jpeg', 'photo'],    [ 'https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/JOH54BOZXD5TIP8HW38XKTW6TXELSUSW9BCQIR34.jpeg', 'photo'],   ] }" @keydown.escape= "open = false"   >
                                     
                         
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 0; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/161464200_2932631953632460_78734326110275460_n.jpg"  alt = "Photo number 15 of Bulldog Window Cleaning&#x27;s best work performing a Pressure Washing job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 0; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/161464200_2932631953632460_78734326110275460_n.jpg"  alt = "Photo number 15 of Bulldog Window Cleaning&#x27;s best work performing a Pressure Washing job"   loading="lazy" ></div>
                     
                                     
                         
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 1; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/BLQ8NP486457JLTAOTJYCMBE03VEB6LKTNG6HDFM.jpeg"  alt = "Photo number 14 of Bulldog Window Cleaning&#x27;s best work performing a Pressure Washing job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 1; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/BLQ8NP486457JLTAOTJYCMBE03VEB6LKTNG6HDFM.jpeg"  alt = "Photo number 14 of Bulldog Window Cleaning&#x27;s best work performing a Pressure Washing job"   loading="lazy" ></div>
                     
                                     
                         
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 2; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/6a2ced71-983e-4084-8734-d1751ab6d6be.jpeg"  alt = "-image"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 2; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/6a2ced71-983e-4084-8734-d1751ab6d6be.jpeg"  alt = "-image"   loading="lazy" ></div>
                     
                                     
                         
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 3; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/FPNN5WHVPGV9TU40EHSR9QKBRGYC5AT49LEGXUES.jpeg"  alt = "Photo number 13 of Bulldog Window Cleaning&#x27;s best work performing a Window Cleaning job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 3; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/FPNN5WHVPGV9TU40EHSR9QKBRGYC5AT49LEGXUES.jpeg"  alt = "Photo number 13 of Bulldog Window Cleaning&#x27;s best work performing a Window Cleaning job"   loading="lazy" ></div>
                     
                                     
                         
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 4; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/5JMNUZR3QSF2JH1VW1EKUM3G1POTA06DDNHSLR3W.jpeg"  alt = "Photo number 11 of Bulldog Window Cleaning&#x27;s best work performing a Window Cleaning job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 4; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/5JMNUZR3QSF2JH1VW1EKUM3G1POTA06DDNHSLR3W.jpeg"  alt = "Photo number 11 of Bulldog Window Cleaning&#x27;s best work performing a Window Cleaning job"   loading="lazy" ></div>
                     
                                     
                         
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 5; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/K8IP1HQZAOJRQYH6BFS6T7JC38ESAC2HSICHW2DC.jpeg"  alt = "Photo number 10 of Bulldog Window Cleaning&#x27;s best work performing a Window Cleaning job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 5; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/K8IP1HQZAOJRQYH6BFS6T7JC38ESAC2HSICHW2DC.jpeg"  alt = "Photo number 10 of Bulldog Window Cleaning&#x27;s best work performing a Window Cleaning job"   loading="lazy" ></div>
                     
                                     
                         
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 6; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/2XUFFPVETWIF5KUARUVRXXGF6C95GU6NX189UM6V.jpeg"  alt = "Photo number 9 of Bulldog Window Cleaning&#x27;s best work performing a Window Cleaning job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 6; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/2XUFFPVETWIF5KUARUVRXXGF6C95GU6NX189UM6V.jpeg"  alt = "Photo number 9 of Bulldog Window Cleaning&#x27;s best work performing a Window Cleaning job"   loading="lazy" ></div>
                     
                                     
                         
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 7; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/TSE3QBG0HPCUBXUAHM5L3EQ82CTGKQ1LIROBFW4Q.jpeg"  alt = "Photo number 7 of Bulldog Window Cleaning&#x27;s best work performing a Pressure Washing job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 7; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/TSE3QBG0HPCUBXUAHM5L3EQ82CTGKQ1LIROBFW4Q.jpeg"  alt = "Photo number 7 of Bulldog Window Cleaning&#x27;s best work performing a Pressure Washing job"   loading="lazy" ></div>
                     
                                     
                         
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 8; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/54695e39-4da9-47d6-8922-3cd59f91ba0a.jpeg"  alt = "-image"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 8; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/54695e39-4da9-47d6-8922-3cd59f91ba0a.jpeg"  alt = "-image"   loading="lazy" ></div>
                     
                                     
                         
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 9; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/A3ABPF4ALBUWNT6NRKRT7K7S9CO9R0F7ZUO7UPZ3.jpeg"  alt = "Photo number 6 of Bulldog Window Cleaning&#x27;s best work performing a null job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 9; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/A3ABPF4ALBUWNT6NRKRT7K7S9CO9R0F7ZUO7UPZ3.jpeg"  alt = "Photo number 6 of Bulldog Window Cleaning&#x27;s best work performing a null job"   loading="lazy" ></div>
                     
                                     
                         
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 10; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/XRAGMQHQJU2ZP8P2GBTI0VYGUGW5TF6ZFJMO7F2K.jpeg"  alt = "Photo number 5 of Bulldog Window Cleaning&#x27;s best work performing a null job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 10; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/XRAGMQHQJU2ZP8P2GBTI0VYGUGW5TF6ZFJMO7F2K.jpeg"  alt = "Photo number 5 of Bulldog Window Cleaning&#x27;s best work performing a null job"   loading="lazy" ></div>
                     
                                     
                         
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 11; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/4UTZQJ5Q2V5TEBN39FI12MJ47OOCNKW38DVUSCQM.png"  alt = "Photo number 4 of Bulldog Window Cleaning&#x27;s best work performing a null job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 11; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/4UTZQJ5Q2V5TEBN39FI12MJ47OOCNKW38DVUSCQM.png"  alt = "Photo number 4 of Bulldog Window Cleaning&#x27;s best work performing a null job"   loading="lazy" ></div>
                     
                                     
                         
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 12; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/9QVTK23D53QRY8T7F8Z8UWVYBBOGYKMSF40DP6WB.jpeg"  alt = "Photo number 3 of Bulldog Window Cleaning&#x27;s best work performing a null job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 12; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/9QVTK23D53QRY8T7F8Z8UWVYBBOGYKMSF40DP6WB.jpeg"  alt = "Photo number 3 of Bulldog Window Cleaning&#x27;s best work performing a null job"   loading="lazy" ></div>
                     
                                     
                         
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 13; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/LCJ6LJ2TICUG78Y576JQ6TK3GYYTS92DR5OVG2MT.jpeg"  alt = "Photo number 2 of Bulldog Window Cleaning&#x27;s best work performing a null job"   loading="lazy" ></div>
-                    
-                                    
-                        
-                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 14; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/JOH54BOZXD5TIP8HW38XKTW6TXELSUSW9BCQIR34.jpeg"  alt = "Photo number 1 of Bulldog Window Cleaning&#x27;s best work performing a null job"   loading="lazy" ></div>
+                        <div class="flex cursor-pointer sm:h-30 md:h-auto md:w-1/3 px-4 mb-8 hover:bg-opacity-40" @click="activeSlide = 13; open = true; " ><img class="rounded shadow-md object-cover w-full h-60" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/JOH54BOZXD5TIP8HW38XKTW6TXELSUSW9BCQIR34.jpeg"  alt = "Photo number 1 of Bulldog Window Cleaning&#x27;s best work performing a null job"   loading="lazy" ></div>
                     
                  
                                     
@@ -1049,7 +1053,6 @@ observer.observe(target)
             </div>
         </div>
     </div>
-
 
     </div>
 </section>
